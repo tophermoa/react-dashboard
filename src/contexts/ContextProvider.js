@@ -8,7 +8,7 @@ const initialState = {
     userProfile:false,
     notification:false
 }
-
+// test commit
 export const ContextProvider = ({ children }) => {
     const [activeMenu, setActiveMenu] = useState(true);
     const [isClicked, setIsClicked] = useState(initialState);
