@@ -9,6 +9,7 @@ const initialState = {
     notification:false
 }
 // test commit
+// test commit 2
 export const ContextProvider = ({ children }) => {
     const [activeMenu, setActiveMenu] = useState(true);
     const [isClicked, setIsClicked] = useState(initialState);
