@@ -9,21 +9,22 @@ import './App.css'
 import {useStateContext} from './contexts/ContextProvider'
 
 const App = () => {
-  const { activeMenu } = useStateContext();
+  const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();
    
   return (
-    <div>
+    <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
         <div className='flex relative dark:bg-main-dark-bg'>
           <div className='fixed right-4 bottom-4' style={{zIndex:'1000'}}>
             <TooltipComponent content="Settings" position="Top">
-              <button stype="button" className='text-3xl p-3 hover:drop-shadow-xl hover:bg-light-grey text-white' style={{background:'blue', borderRadius:'50%'}}>
+              <button stype="button" className='text-3xl p-3 hover:drop-shadow-xl hover:bg-light-grey text-white' style={{background:currentColor, borderRadius:'50%'}} 
+              onClick={() => setThemeSettings(true)}>
                 <FiSettings />
               </button>
             </TooltipComponent>
           </div>
           {activeMenu ? (
-            <div className="w-72 fixed sidebar dar:bg-secondary-dar-bg bg-white">
+            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
               <Sidebar/>
             </div>
           ) : (
@@ -32,13 +33,19 @@ const App = () => {
             </div>
           )}
           <div className={
-            `dark:bg-main-bg bg-main-bg min-h-screen w-full ${activeMenu ?
-              'md:ml-72' : 'flex-2'}`
+            `dark:bg-main-dark-bg bg-main-bg min-h-screen w-full 
+            ${activeMenu ?
+            'md:ml-72' : 'flex-2'}`
             }>
               <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
                 <Navbar/>
               </div>
             <div>
+              
+              {/* ini percabangan if then langsung without else */}
+              {/* if themeSettings == true then show <ThemeSettings /> */}
+              {themeSettings && <ThemeSettings />}
+              
               <Routes>
                 {/* Dashboard */}
                 <Route path="/" element={ <Ecommerce/> } />
